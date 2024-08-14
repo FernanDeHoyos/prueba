@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { actualizarProducto,  } from '../api/api'; 
+import { actualizarProducto, obtenerProductoPorId } from '../api/api'; 
 
 const Actualizar = ({ id }) => {
     const [producto, setProducto] = useState({

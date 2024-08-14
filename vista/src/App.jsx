@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import Agregar from './pages/Agregar'
+import Listar from './pages/Listar'
+import Actualizar from './pages/Actualizar'
+import { Route, Router, Routes } from 'react-router-dom'
 
 
 
@@ -7,7 +10,11 @@ function App() {
 
   return (
     <>
-     <Agregar/>
+     <Routes>
+      <Route path="/agregar" element={<Agregar />} />
+      <Route path="/leer" element={<Listar />} />
+      <Route path="/editar/:id" element={<Actualizar />} />
+    </Routes>
     </>
   )
 }

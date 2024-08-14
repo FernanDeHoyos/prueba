@@ -32,7 +32,6 @@ const Listar = () => {
                     <li key={producto.id}>
                         {producto.nombre} - {producto.descripcion} - {producto.precio} - {producto.stock}
                         <button onClick={() => handleEliminar(producto.id)}>Eliminar</button>
-                        <button onClick={() => /* lógica para editar */}>Editar</button>
                     </li>
                 ))}
             </ul>
