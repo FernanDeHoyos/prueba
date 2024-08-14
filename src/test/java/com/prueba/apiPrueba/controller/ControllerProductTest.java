@@ -5,36 +5,36 @@
 package com.prueba.apiPrueba.controller;
 
 import com.prueba.apiPrueba.modelo.Producto;
-import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
+import com.prueba.apiPrueba.repository.IrepoProducto;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
-/**
- *
- * @author fernan
- */
+import java.util.List;
+import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 public class ControllerProductTest {
-    
-    public ControllerProductTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
+
+    @Mock
+    private IrepoProducto repoProducto;
+
+    @InjectMocks
+    private ControllerProduct controllerProduct;
+
     @BeforeEach
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
@@ -44,13 +44,13 @@ public class ControllerProductTest {
      */
     @Test
     public void testListarProductos() {
-        System.out.println("listarProductos");
-        ControllerProduct instance = new ControllerProduct();
-        List<Producto> expResult = null;
-        List<Producto> result = instance.listarProductos();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Producto producto1 = new Producto(1L, "Camisa", "Azul", 20.0, 10);
+        Producto producto2 = new Producto(2L, "Pantalón", "Negro", 30.0, 15);
+        when(repoProducto.findAll()).thenReturn(Arrays.asList(producto1, producto2));
+
+        List<Producto> productos = controllerProduct.listarProductos();
+        assertEquals(2, productos.size());
+        verify(repoProducto, times(1)).findAll();
     }
 
     /**
@@ -58,12 +58,11 @@ public class ControllerProductTest {
      */
     @Test
     public void testAgregarProducto() {
-        System.out.println("agregarProducto");
-        Producto p = null;
-        ControllerProduct instance = new ControllerProduct();
-        instance.agregarProducto(p);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Producto producto = new Producto(1L, "Zapatos", "Negros", 50.0, 5);
+        when(repoProducto.save(producto)).thenReturn(producto);
+
+        controllerProduct.agregarProducto(producto);
+        verify(repoProducto, times(1)).save(producto);
     }
 
     /**
@@ -71,15 +70,18 @@ public class ControllerProductTest {
      */
     @Test
     public void testActualizarProducto() {
-        System.out.println("actualizarProducto");
-        Long id = null;
-        Producto productoActualizado = null;
-        ControllerProduct instance = new ControllerProduct();
-        ResponseEntity<Producto> expResult = null;
-        ResponseEntity<Producto> result = instance.actualizarProducto(id, productoActualizado);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Long id = 1L;
+        Producto productoExistente = new Producto(id, "Camisa", "Roja", 25.0, 10);
+        Producto productoActualizado = new Producto(id, "Camisa", "Rojo", 20.0, 8);
+
+        when(repoProducto.findById(id)).thenReturn(Optional.of(productoExistente));
+        when(repoProducto.save(productoExistente)).thenReturn(productoExistente);
+
+        ResponseEntity<Producto> response = controllerProduct.actualizarProducto(id, productoActualizado);
+        assertEquals(ResponseEntity.ok(productoExistente), response);
+        assertEquals("Rojo", productoExistente.getDescripcion());
+        verify(repoProducto, times(1)).findById(id);
+        verify(repoProducto, times(1)).save(productoExistente);
     }
 
     /**
@@ -87,12 +89,10 @@ public class ControllerProductTest {
      */
     @Test
     public void testEliminarProducto() {
-        System.out.println("eliminarProducto");
-        Long id = null;
-        ControllerProduct instance = new ControllerProduct();
-        instance.eliminarProducto(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Long id = 1L;
+        doNothing().when(repoProducto).deleteById(id);
+
+        controllerProduct.eliminarProducto(id);
+        verify(repoProducto, times(1)).deleteById(id);
     }
-    
 }

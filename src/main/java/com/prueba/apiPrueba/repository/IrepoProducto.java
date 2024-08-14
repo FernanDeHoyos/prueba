@@ -6,13 +6,15 @@ package com.prueba.apiPrueba.repository;
 
 import com.prueba.apiPrueba.modelo.Producto;
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * clase Interface para hacer uso de los metodos mas comunes a la hora de hacer un CRUD
  * @author fernan
  */
-public interface IrepoProducto extends CrudRepository<Producto, Long>, JpaSpecificationExecutor<Producto>{
-    public List<Producto> ListarProduc();
+@Repository
+public interface IrepoProducto extends JpaRepository<Producto, Long>{
+    
 }

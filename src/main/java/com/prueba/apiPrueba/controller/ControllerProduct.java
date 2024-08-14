@@ -38,9 +38,10 @@ public class ControllerProduct {
      * @return lista de los productos con su informacion
      */
     @GetMapping("/leer")
-    public List<Producto> listarProductos() {
-        return (List<Producto>) repoProducto.findAll();
-    }
+       public List<Producto> listarProductos() {
+     return repoProducto.findAll(); // findAll() debería funcionar sin problemas si la interfaz está bien definida
+}
+
 
     
     /**
@@ -54,6 +55,15 @@ public class ControllerProduct {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    
+    @GetMapping("/{id}")
+    public Producto obtenerProductoPorId(@PathVariable Long id)  {
+        Optional<Producto> producto = repoProducto.findById(id);
+        if (producto.isPresent()) {
+            return producto.get();
+        } 
+        return null;
     }
     
     /**
