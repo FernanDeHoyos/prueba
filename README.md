@@ -50,15 +50,15 @@ Asegúrate de tener MySQL instalado y ejecutándose. Crea una base de datos para
 
 Configura la conexión a la base de datos en el archivo src/main/resources/application.properties:
 
-properties
-
-'spring.datasource.url=jdbc:mysql://localhost:3306/nombre_base_datos'
-'spring.datasource.username=usuario'
-'spring.datasource.password=contraseña'
+```bash
+spring.datasource.url=jdbc:mysql://localhost:3306/nombre_base_datos
+spring.datasource.username=usuario
+spring.datasource.password=contraseña
 
 4. **Ejecutar el Backend**
 
-```./mvnw spring-boot:run
+```bash
+./mvnw spring-boot:run
 
 ### Frontend
 
