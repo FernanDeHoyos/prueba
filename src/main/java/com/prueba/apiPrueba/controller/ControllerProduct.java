@@ -4,6 +4,7 @@
  */
 package com.prueba.apiPrueba.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.prueba.apiPrueba.modelo.Producto;
 import com.prueba.apiPrueba.repository.IrepoProducto;
 import jakarta.websocket.server.PathParam;
@@ -40,6 +41,7 @@ public class ControllerProduct {
     public List<Producto> listarProductos() {
         return (List<Producto>) repoProducto.findAll();
     }
+
     
     /**
      * Metodo para agregar un producto
