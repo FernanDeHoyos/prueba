@@ -1,28 +1,69 @@
-# Getting Started
+# Proyecto de Gestión de Productos
 
-### Reference Documentation
-For further reference, please consider the following sections:
+Este proyecto es una aplicación web para gestionar productos. Utiliza React para el frontend y Spring Boot para el backend, con MySQL como base de datos.
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.3.2/maven-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.3.2/maven-plugin/build-image.html)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/3.3.2/reference/htmlsingle/index.html#using.devtools)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.3.2/reference/htmlsingle/index.html#web)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/3.3.2/reference/htmlsingle/index.html#data.sql.jpa-and-spring-data)
+## Tabla de Contenidos
 
-### Guides
-The following guides illustrate how to use some features concretely:
+- [Descripción](#descripción)
+- [Tecnologías](#tecnologías)
+- [Requisitos](#requisitos)
+- [Instalación y Configuración](#instalación-y-configuración)
+- [Uso](#uso)
+- [Contribución](#contribución)
+- [Licencia](#licencia)
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
+## Descripción
 
-### Maven Parent overrides
+La aplicación permite agregar, actualizar, listar y eliminar productos. El proyecto está dividido en dos partes principales:
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+1. **Frontend**: Desarrollado con React y Bootstrap, proporciona una interfaz de usuario para interactuar con los productos.
+2. **Backend**: Desarrollado con Spring Boot, expone una API RESTful para manejar las operaciones relacionadas con los productos.
 
+## Tecnologías
+
+- **Frontend**: React, Bootstrap, SweetAlert2
+- **Backend**: Spring Boot, Spring Data JPA, MySQL
+- **Base de Datos**: MySQL
+
+## Requisitos
+
+- [Node.js](https://nodejs.org) (versión 14.x o superior)
+- [MySQL](https://www.mysql.com) (versión 8.0 o superior)
+- [Java 17](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+- [Maven](https://maven.apache.org)
+
+## Instalación y Configuración
+
+### Backend
+
+1. **Clonar el Repositorio**
+
+   ```bash
+   git clone <URL-del-repositorio>
+   cd <nombre-del-repositorio>/backend
+
+2. **Configurar la Base de Datos** 
+
+Asegúrate de tener MySQL instalado y ejecutándose. Crea una base de datos para el proyecto.
+
+3. **Configurar el Archivo application.properties**
+
+Configura la conexión a la base de datos en el archivo src/main/resources/application.properties:
+
+properties
+
+'spring.datasource.url=jdbc:mysql://localhost:3306/nombre_base_datos'
+'spring.datasource.username=usuario'
+'spring.datasource.password=contraseña'
+
+4. **Ejecutar el Backend**
+
+```./mvnw spring-boot:run
+
+### Frontend
+
+1. **Instalar Dependencias**
+
+   ```bash
+   cd ../frontend
+   npm install
